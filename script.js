@@ -29,13 +29,13 @@ const calculateIncome = (amount, eventType) => {
     numberIncomeEl.textContent = Number(currentIncome) + income;
 }
 
-formEl.addEventListener('submit', (event) => {
+const submitHandler = (event) => {
     event.preventDefault();
     const eventType = event.type;
 
     const description = inputDescriptionEl.value;
     const amount = inputAmountEl.value;
-    if (amount < 0){
+    if (amount < 0) {
         var calculator = calculateExpenses;
         var liType = 'expense';
         var sign = '';
@@ -56,7 +56,7 @@ formEl.addEventListener('submit', (event) => {
     inputDescriptionEl.value = '';
     calculator(amount, eventType);
     calculateBalace();
-});
+}
 
 const clickHandler = (event) => {
     const clickedEl = event.target.parentNode;
@@ -68,5 +68,7 @@ const clickHandler = (event) => {
     amount > 0 ? calculateIncome(amount, eventType) : calculateExpenses(amount,eventType);
     calculateBalace();
 }
+
+formEl.addEventListener('submit', submitHandler);
 
 transactionsEl.addEventListener('click', clickHandler);
